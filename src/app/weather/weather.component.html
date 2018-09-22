@@ -1,0 +1,54 @@
+<div class="hero" data-bg-image="assets/images/banner.jpg">
+  <div class="container">
+
+  </div>
+</div>
+<div class="forecast-table">
+  <div class="container">
+    <div [style.display]="isVisible ? 'block' : 'none'">
+      <div class="forecast-container">
+        <img src="assets/images/loader.gif" width="200">
+      </div>
+    </div>
+    <div class="forecast-container" *ngIf="weatherData">
+      <div class="today forecast">
+        <div class="forecast-header">
+          <div class="day">{{dayName}}</div>
+          <div class="date">{{weatherData.consolidated_weather[0].applicable_date | date}}</div>
+        </div>
+        <div class="forecast-content" *ngIf="weatherData">
+          <div class="location">{{weatherData.title}}</div>
+          <div class="degree">
+            <div class="num">{{weatherData.consolidated_weather[0].the_temp | transformPipe}}<sup>o</sup>C</div>
+            <div class="forecast-icon">
+              <img src="assets/images/weather/{{weatherData.consolidated_weather[0].weather_state_abbr}}.svg" alt=""
+                width=70>
+            </div>
+          </div>
+          <span><img src="assets/images/weather/{{weatherData.consolidated_weather[0].weather_state_abbr}}.svg" alt=""
+              width=30>{{weatherData.consolidated_weather[0].max_temp | transformPipe}}<sup>o</sup>C -
+            {{weatherData.consolidated_weather[0].min_temp | transformPipe}}<sup>o</sup>C</span>
+          <span><img src="assets/images/icon-wind.png" alt="">{{wind_speed}}km/h</span>
+          <span><img src="assets/images/icon-compass.png" alt="">{{weatherData.consolidated_weather[0].wind_direction_compass}}</span>
+        </div>
+        <div class="forecast-content" *ngIf="!weatherData">No results were found. Try changing the location!</div>
+      </div>
+
+      <div class="forecast" *ngFor="let weatherDay of weatherData.consolidated_weather | slice:1">
+        <div class="forecast-header">
+          <div class="day">{{weatherDay.applicable_date | date}}({{weatherDay.applicable_date | date:'EEEE'}})</div>
+        </div> <!-- .forecast-header -->
+        <div class="forecast-content">
+          <div class="forecast-icon">
+            <img src="assets/images/weather/{{weatherDay.weather_state_abbr}}.svg" alt="" width=48>
+          </div>
+          <div class="degree">{{weatherDay.max_temp | transformPipe}}<sup>o</sup>C</div>
+          <small>{{weatherDay.min_temp | transformPipe}}<sup>o</sup></small>
+        </div>
+      </div>
+    </div>
+    <div class="forecast-container" *ngIf="noResult">No results were found. Try changing the location!</div>
+  </div>
+</div>
+<main class="main-content">
+</main> <!-- .main-content -->

@@ -1,0 +1,100 @@
+<div class="hero" >
+  <div class="container">
+    <form  class="find-location"  #f="ngForm" (ngSubmit)="onSubmit(f)"  novalidate>
+      <input type="text" placeholder="Find your location..." name="location" [(ngModel)]="model.location"
+      #location="ngModel" [ngClass]="{ 'is-invalid': f.submitted && location.invalid }" required>
+      <input type="submit" value="Find" [disabled]="!f.form.valid">
+    </form>
+    
+  </div>
+</div>
+<div class="forecast-table">
+  <div class="container">
+    <div class="forecast-container">
+          <div [style.display]="isVisible ? 'block' : 'none'">
+            <img src="assets/images/loader.gif" width="200">
+          </div>
+          <div class="forecast" *ngIf="IstanbulWeatherData">
+              <div class="forecast-header">
+                <div class="day"><a  routerLink="/weather/{{IstanbulWeatherData.woeid}}">Istanbul</a></div>
+              </div> <!-- .forecast-header -->
+              <div class="forecast-content">
+                <div class="forecast-icon">
+                  <img *ngIf="IstanbulWeatherData" src="assets/images/weather/{{IstanbulWeatherData.consolidated_weather[0].weather_state_abbr}}.svg"
+                    alt="" width=48>
+                </div>
+                <div class="degree">{{IstanbulWeatherData.consolidated_weather[0].max_temp | transformPipe}}<sup>o</sup>C</div>
+                <small>{{IstanbulWeatherData.consolidated_weather[0].min_temp | transformPipe}}<sup>o</sup></small>
+              </div>
+            </div>
+      
+      <div class="forecast" *ngIf="BerlinWeatherData"> 
+        <div class="forecast-header">
+          <div class="day"><a  routerLink="/weather/{{BerlinWeatherData.woeid}}">Berlin</a></div>
+        </div> <!-- .forecast-header -->
+        <div class="forecast-content">
+          <div class="forecast-icon">
+            <img *ngIf="BerlinWeatherData" src="assets/images/weather/{{BerlinWeatherData.consolidated_weather[0].weather_state_abbr}}.svg"
+              alt="" width=48>
+          </div>
+          <div class="degree">{{BerlinWeatherData.consolidated_weather[0].max_temp | transformPipe}}<sup>o</sup>C</div>
+          <small>{{BerlinWeatherData.consolidated_weather[0].min_temp | transformPipe}}<sup>o</sup></small>
+        </div>
+      </div>
+      <div class="forecast" *ngIf="LondonWeatherData">
+        <div class="forecast-header">
+          <div class="day"><a  routerLink="/weather/{{LondonWeatherData.woeid}}">London</a></div>
+        </div> <!-- .forecast-header -->
+        <div class="forecast-content">
+          <div class="forecast-icon">
+            <img *ngIf="LondonWeatherData" src="assets/images/weather/{{LondonWeatherData.consolidated_weather[0].weather_state_abbr}}.svg"
+              alt="" width=48>
+          </div>
+          <div class="degree">{{LondonWeatherData.consolidated_weather[0].max_temp | transformPipe}}<sup>o</sup>C</div>
+          <small>{{LondonWeatherData.consolidated_weather[0].min_temp | transformPipe}}<sup>o</sup></small>
+        </div>
+      </div>
+      <div class="forecast" *ngIf="HelsinkiWeatherData">
+        <div class="forecast-header">
+          <div class="day"><a  routerLink="/weather/{{HelsinkiWeatherData.woeid}}">Helsinki</a></div>
+        </div> <!-- .forecast-header -->
+        <div class="forecast-content">
+          <div class="forecast-icon">
+            <img *ngIf="HelsinkiWeatherData" src="assets/images/weather/{{HelsinkiWeatherData.consolidated_weather[0].weather_state_abbr}}.svg"
+              alt="" width=48>
+          </div>
+          <div class="degree">{{HelsinkiWeatherData.consolidated_weather[0].max_temp | transformPipe}}<sup>o</sup>C</div>
+          <small>{{HelsinkiWeatherData.consolidated_weather[0].min_temp | transformPipe}}<sup>o</sup></small>
+        </div>
+      </div>
+      <div class="forecast" *ngIf="DublinWeatherData">
+        <div class="forecast-header">
+          <div class="day"><a  routerLink="/weather/{{DublinWeatherData.woeid}}">Dublin</a></div>
+        </div> <!-- .forecast-header -->
+        <div class="forecast-content">
+          <div class="forecast-icon">
+            <img *ngIf="DublinWeatherData" src="assets/images/weather/{{DublinWeatherData.consolidated_weather[0].weather_state_abbr}}.svg"
+              alt="" width=48>
+          </div>
+          <div class="degree">{{DublinWeatherData.consolidated_weather[0].max_temp | transformPipe}}<sup>o</sup>C</div>
+          <small>{{DublinWeatherData.consolidated_weather[0].min_temp | transformPipe}}<sup>o</sup></small>
+        </div>
+      </div>
+      <div class="forecast" *ngIf="VancouverWeatherData">
+        <div class="forecast-header">
+          <div class="day"><a  routerLink="/weather/{{VancouverWeatherData.woeid}}">Vancouver</a></div>
+        </div> <!-- .forecast-header -->
+        <div class="forecast-content">
+          <div class="forecast-icon">
+            <img *ngIf="VancouverWeatherData" src="assets/images/weather/{{VancouverWeatherData.consolidated_weather[0].weather_state_abbr}}.svg"
+              alt="" width=48>
+          </div>
+          <div class="degree">{{VancouverWeatherData.consolidated_weather[0].max_temp | transformPipe}}<sup>o</sup>C</div>
+          <small>{{VancouverWeatherData.consolidated_weather[0].min_temp | transformPipe}}<sup>o</sup></small>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<main class="main-content">
+</main> <!-- .main-content -->
